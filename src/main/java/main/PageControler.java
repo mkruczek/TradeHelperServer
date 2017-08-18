@@ -113,4 +113,9 @@ public class PageControler {
         return "Success";
     }
 
+    @RequestMapping("/thx")
+    public String thx(){
+        return "BARDZO DZIĘKUJĘ PANIE SENIOR!!";
+    }
+
 }
