@@ -97,6 +97,22 @@ public class PageControler {
         return taskDtoList;
     }
 
+    @RequestMapping("/tasks/{id}")
+    public TaskDto task(@PathVariable int id) {
+        Task task = taskRepository.findAll().get(id);
+
+        TaskDto taskDto = new TaskDto();
+
+            taskDto.setId(task.getId());
+            taskDto.setName(task.getName());
+            taskDto.setDescription(task.getDescription());
+            taskDto.setBudget(task.getBudget());
+            taskDto.setDone(task.getDone());
+
+
+        return taskDto;
+    }
+
     @RequestMapping(value = "/task/add", method = RequestMethod.POST)
     public String addTask(ModelMap modelMap, @RequestBody TaskDto taskDto) throws ParseException{
 
