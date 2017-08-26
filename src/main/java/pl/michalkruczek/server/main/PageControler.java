@@ -133,4 +133,9 @@ public class PageControler {
         return "BARDZO DZIĘKUJĘ PANIE SENIOR!!";
     }
 
+    @RequestMapping("/test/{numb}")
+    public Integer math(@PathVariable Integer numb){
+        return numb * 2;
+    }
+
 }

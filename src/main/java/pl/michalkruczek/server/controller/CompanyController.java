@@ -68,6 +68,7 @@ public class CompanyController {
             companyDto.setPhone(company.getPhone());
             companyDto.setEmail(company.getEmail());
 
+
         return companyDto;
     }
 
