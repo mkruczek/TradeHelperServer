@@ -15,13 +15,14 @@ import java.util.List;
  * Created by mikr on 26/08/17.
  */
 @RestController
+@RequestMapping("/company")
 public class CompanyController {
 
     @Autowired
     public CompanyRepository companyRepository;
 
-    @RequestMapping(value = "/company/add", method = RequestMethod.POST)
-    public String addCompany(ModelMap modelMap, @RequestBody CompanyDto companyDto) throws ParseException {
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addCompany(@RequestBody CompanyDto companyDto) throws ParseException {
 
         Company company = new Company();
 
@@ -34,11 +35,11 @@ public class CompanyController {
 
         companyRepository.save(company);
 
-        return "Add Company - Success";
+        return "Success - add product [" + company.getName() + "].";
     }
 
-    @RequestMapping("/company")
-    public List<CompanyDto> company() {
+    @RequestMapping("/all")
+    public List<CompanyDto> allCompanys() {
         List<Company> companyList = companyRepository.findAll();
         List<CompanyDto> companyDtoList = new ArrayList<CompanyDto>();
 
@@ -56,29 +57,46 @@ public class CompanyController {
         return companyDtoList;
     }
 
-    @RequestMapping("/company/{id}")
-    public CompanyDto singleCompany(@PathVariable int id) {
-        Company company = companyRepository.findAll().get(id);
+    @RequestMapping("/{id}")
+    public CompanyDto singleCompany(@PathVariable long id) {
+        Company company = companyRepository.findOne(id);
 
-            CompanyDto companyDto = new CompanyDto();
-            companyDto.setId(company.getId());
-            companyDto.setName(company.getName());
-            companyDto.setNip(company.getNip());
-            companyDto.setAddress(company.getAddress());
-            companyDto.setPhone(company.getPhone());
-            companyDto.setEmail(company.getEmail());
-
+        CompanyDto companyDto = new CompanyDto();
+        companyDto.setId(company.getId());
+        companyDto.setName(company.getName());
+        companyDto.setNip(company.getNip());
+        companyDto.setAddress(company.getAddress());
+        companyDto.setPhone(company.getPhone());
+        companyDto.setEmail(company.getEmail());
 
         return companyDto;
     }
 
-    @RequestMapping("/company/delete/{id}")
-    public String deleteCompany(@PathVariable long id){
-        companyRepository.delete(id);
+    @RequestMapping(value = "/updata/{id}", method = RequestMethod.PUT)
+    public String updataCompany(@PathVariable long id, @RequestBody CompanyDto companyDto) {
 
-        return "Delete company - success";
+        Company company = companyRepository.findOne(id);
+
+        company.setName(companyDto.getName());
+        company.setNip(companyDto.getNip());
+        company.setAddress(companyDto.getAddress());
+        company.setPhone(companyDto.getPhone());
+        company.setEmail(companyDto.getEmail());
+
+        companyRepository.save(company);
+
+        return "Updata company [" + company.getName() + "].";
     }
 
-    //TODO - company Update method
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public String deleteCompany(@PathVariable long id) {
+
+        String comapnyName = companyRepository.findOne(id).getName();
+
+        companyRepository.delete(id);
+
+        return "Delete company [" + comapnyName + "].";
+    }
+
 
 }
