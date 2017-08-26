@@ -1,15 +1,14 @@
-package main;
+package pl.michalkruczek.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 //@Controller
-@EnableAutoConfiguration
-@ComponentScan("main")
-@EnableJpaRepositories(basePackageClasses = TaskRepository.class)
+//@EnableAutoConfiguration
+//@ComponentScan("server")
+//@EnableJpaRepositories(basePackageClasses = TaskRepository.class)
 @SpringBootApplication
 public class Main {
 

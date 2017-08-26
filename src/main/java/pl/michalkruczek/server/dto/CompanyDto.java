@@ -1,4 +1,4 @@
-package dto;
+package pl.michalkruczek.server.dto;
 
 
 /**
@@ -9,7 +9,7 @@ public class CompanyDto {
 
     private Long id;
     private String name;
-    private String NIP;
+    private String nip;
     private String address;
     private String phone;
     private String email;
@@ -30,12 +30,12 @@ public class CompanyDto {
         this.name = name;
     }
 
-    public String getNIP() {
-        return NIP;
+    public String getNip() {
+        return nip;
     }
 
-    public void setNIP(String NIP) {
-        this.NIP = NIP;
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 
     public String getAddress() {

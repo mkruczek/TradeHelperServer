@@ -1,4 +1,4 @@
-package main;
+package pl.michalkruczek.server.main;
 
 /**
  * Created by mikr on 18/08/17.

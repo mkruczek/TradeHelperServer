@@ -1,4 +1,4 @@
-package model;
+package pl.michalkruczek.server.model;
 
 /**
  * Created by mikr on 25/08/17.
@@ -18,7 +18,7 @@ public class Company {
     @Column
     private String name;
     @Column
-    private String NIP;
+    private String nip;
     @Column
     private String address;
     @Column
@@ -42,12 +42,12 @@ public class Company {
         this.name = name;
     }
 
-    public String getNIP() {
-        return NIP;
+    public String getNip() {
+        return nip;
     }
 
-    public void setNIP(String NIP) {
-        this.NIP = NIP;
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 
     public String getAddress() {

@@ -1,8 +1,8 @@
-package main;
+package pl.michalkruczek.server.main;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import pl.michalkruczek.server.main.Task;
 
 import java.util.List;
 

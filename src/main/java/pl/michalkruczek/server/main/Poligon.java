@@ -1,4 +1,4 @@
-package main;
+package pl.michalkruczek.server.main;
 
 import java.util.Calendar;
 import java.util.Date;
