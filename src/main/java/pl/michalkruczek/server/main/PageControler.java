@@ -138,4 +138,8 @@ public class PageControler {
         return numb * 2;
     }
 
+    @RequestMapping("/task/done")
+    public List<Task> findByDone(){
+        return taskRepository.findByDone(true);
+    }
 }
