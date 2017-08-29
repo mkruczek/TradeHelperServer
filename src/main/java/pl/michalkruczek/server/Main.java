@@ -5,10 +5,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-//@Controller
-//@EnableAutoConfiguration
-//@ComponentScan("server")
-//@EnableJpaRepositories(basePackageClasses = TaskRepository.class)
 @SpringBootApplication
 public class Main {
 

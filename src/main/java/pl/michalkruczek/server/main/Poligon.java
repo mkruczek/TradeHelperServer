@@ -18,6 +18,12 @@ public class Poligon {
 
 
         System.out.println(date);
+
+
+        String jeson = "[{\"id\":1,\"companyId\":3,\"productId\":1},{\"id\":2,\"companyId\":3,\"productId\":2},{\"id\":3,\"companyId\":3,\"productId\":1}]";
+
+
+
     }
 
 }
