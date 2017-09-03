@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
+    public List<Note> findByUserId(Long id);
+
     @Query("select n from Note n where n.title like %?1%")// TODO nie działa
     public List<Note> getByDescriptionLike(String search);
 

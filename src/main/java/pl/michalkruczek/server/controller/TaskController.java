@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.michalkruczek.server.dto.TaskDto;
 import pl.michalkruczek.server.model.Task;
+import pl.michalkruczek.server.model.User;
 import pl.michalkruczek.server.repository.TaskRepository;
+import pl.michalkruczek.server.repository.UserRepository;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class TaskController {
 
     @Autowired
     public TaskRepository taskRepository;
+    @Autowired
+    public UserRepository userRepository;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addTask(@RequestBody TaskDto taskDto) throws ParseException {
@@ -28,6 +32,7 @@ public class TaskController {
         task.setDescription(taskDto.getDescription());
         task.setDate(taskDto.getDate());
         task.setDone(taskDto.getDone());
+        task.setUserId(taskDto.getUserId());
 
         taskRepository.save(task);
 
@@ -46,6 +51,30 @@ public class TaskController {
             taskDto.setDescription(task.getDescription());
             taskDto.setDate(task.getDate());
             taskDto.setDone(task.getDone());
+            taskDto.setUserId(task.getUserId());
+
+            taskDtoList.add(taskDto);
+        }
+
+        return taskDtoList;
+    }
+
+    @RequestMapping("/user/{login}")
+    public List<TaskDto> allTaskByUser(@PathVariable String login){
+
+        Long userId = userRepository.findByLogin(login).getId();
+
+        List<Task> taskList = taskRepository.findByUserId(userId);
+        List<TaskDto> taskDtoList = new ArrayList<TaskDto>();
+
+        for (Task task : taskList) {
+            TaskDto taskDto = new TaskDto();
+            taskDto.setId(task.getId());
+            taskDto.setName(task.getName());
+            taskDto.setDescription(task.getDescription());
+            taskDto.setDate(task.getDate());
+            taskDto.setDone(task.getDone());
+            taskDto.setUserId(task.getUserId());
 
             taskDtoList.add(taskDto);
         }
@@ -63,6 +92,7 @@ public class TaskController {
         taskDto.setDescription(task.getDescription());
         taskDto.setDate(task.getDate());
         taskDto.setDone(task.getDone());
+        taskDto.setUserId(task.getUserId());
 
         return taskDto;
     }
@@ -76,6 +106,7 @@ public class TaskController {
         task.setDescription(taskDto.getDescription());
         task.setDate(taskDto.getDate());
         task.setDone(taskDto.getDone());
+        taskDto.setUserId(task.getUserId());
 
         taskRepository.save(task);
 

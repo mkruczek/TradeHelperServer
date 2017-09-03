@@ -11,9 +11,6 @@ import java.util.List;
  */
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
+    public List<Task> findByUserId(Long userId);
 
-    public List<Task> findByDone(Boolean done);
-
-    @Query("select t from Task t where t.description like %?1%")
-    public List<Task> getByDescriptionLike(String search);
 }

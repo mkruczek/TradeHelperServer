@@ -5,7 +5,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pl.michalkruczek.server.dto.CompanyDto;
 import pl.michalkruczek.server.model.Company;
+import pl.michalkruczek.server.model.User;
 import pl.michalkruczek.server.repository.CompanyRepository;
+import pl.michalkruczek.server.repository.UserRepository;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class CompanyController {
 
     @Autowired
     public CompanyRepository companyRepository;
+    @Autowired
+    public UserRepository userRepository;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addCompany(@RequestBody CompanyDto companyDto) throws ParseException {
@@ -32,10 +36,11 @@ public class CompanyController {
         company.setAddress(companyDto.getAddress());
         company.setPhone(companyDto.getPhone());
         company.setEmail(companyDto.getEmail());
+        company.setUserId(companyDto.getUserId());
 
         companyRepository.save(company);
 
-        return "Success - add product [" + company.getName() + "].";
+        return "Success - add company [" + company.getName() + "].";
     }
 
     @RequestMapping("/all")
@@ -51,6 +56,32 @@ public class CompanyController {
             companyDto.setAddress(company.getAddress());
             companyDto.setPhone(company.getPhone());
             companyDto.setEmail(company.getEmail());
+            companyDto.setUserId(company.getUserId());
+
+            companyDtoList.add(companyDto);
+        }
+
+        return companyDtoList;
+    }
+
+    @RequestMapping("/user/{login}")
+    public List<CompanyDto> allCompanysByUser(@PathVariable String login) {
+
+        Long userId = userRepository.findByLogin(login).getId();
+
+        List<Company> companyList = companyRepository.findByUserId(userId);
+        List<CompanyDto> companyDtoList = new ArrayList<CompanyDto>();
+
+        for (Company company : companyList) {
+            CompanyDto companyDto = new CompanyDto();
+            companyDto.setId(company.getId());
+            companyDto.setName(company.getName());
+            companyDto.setNip(company.getNip());
+            companyDto.setAddress(company.getAddress());
+            companyDto.setPhone(company.getPhone());
+            companyDto.setEmail(company.getEmail());
+            companyDto.setUserId(company.getUserId());
+
             companyDtoList.add(companyDto);
         }
 
@@ -68,6 +99,7 @@ public class CompanyController {
         companyDto.setAddress(company.getAddress());
         companyDto.setPhone(company.getPhone());
         companyDto.setEmail(company.getEmail());
+        companyDto.setUserId(company.getUserId());
 
         return companyDto;
     }
@@ -82,6 +114,7 @@ public class CompanyController {
         company.setAddress(companyDto.getAddress());
         company.setPhone(companyDto.getPhone());
         company.setEmail(companyDto.getEmail());
+        company.setUserId(companyDto.getUserId());
 
         companyRepository.save(company);
 

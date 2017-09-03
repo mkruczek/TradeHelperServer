@@ -5,7 +5,9 @@ import org.springframework.expression.ParseException;
 import org.springframework.web.bind.annotation.*;
 import pl.michalkruczek.server.dto.NoteDto;
 import pl.michalkruczek.server.model.Note;
+import pl.michalkruczek.server.model.User;
 import pl.michalkruczek.server.repository.NoteRepository;
+import pl.michalkruczek.server.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ public class NoteController {
 
     @Autowired
     public NoteRepository noteRepository;
+    @Autowired
+    public UserRepository userRepository;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addNote(@RequestBody NoteDto noteDto) throws ParseException{
@@ -29,6 +33,7 @@ public class NoteController {
         note.setId(noteDto.getId());
         note.setTitle(noteDto.getTitle());
         note.setNote(noteDto.getNote());
+        note.setUserId(noteDto.getUserId());
 
         noteRepository.save(note);
 
@@ -46,6 +51,29 @@ public class NoteController {
             noteDto.setId(note.getId());
             noteDto.setTitle(note.getTitle());
             noteDto.setNote(note.getNote());
+            noteDto.setUserId(note.getUserId());
+
+            noteDtoList.add(noteDto);
+        }
+
+        return noteDtoList;
+    }
+
+    @RequestMapping("/user/{login}")
+    public List<NoteDto> allNoteByUser(@PathVariable String login){
+
+        Long userId = userRepository.findByLogin(login).getId();
+
+        List<Note> noteList = noteRepository.findByUserId(userId);
+        List<NoteDto> noteDtoList = new ArrayList<NoteDto>();
+
+        for (Note note : noteList) {
+            NoteDto noteDto = new NoteDto();
+
+            noteDto.setId(note.getId());
+            noteDto.setTitle(note.getTitle());
+            noteDto.setNote(note.getNote());
+            noteDto.setUserId(note.getUserId());
 
             noteDtoList.add(noteDto);
         }
@@ -61,6 +89,7 @@ public class NoteController {
         noteDto.setId(note.getId());
         noteDto.setTitle(note.getTitle());
         noteDto.setNote(note.getNote());
+        noteDto.setUserId(note.getUserId());
 
         return noteDto;
     }
@@ -72,6 +101,7 @@ public class NoteController {
 
         note.setTitle(noteDto.getTitle());
         note.setNote(noteDto.getNote());
+        noteDto.setUserId(note.getUserId());
 
         noteRepository.save(note);
 
@@ -88,7 +118,7 @@ public class NoteController {
         return "Delete company [" + noteName + "].";
     }
 
-    @RequestMapping("/find/{title}")
+    @RequestMapping("/find/{title}")//TODO nie śmiga checkout google and noterepository
     public List<NoteDto> findByDescription(@PathVariable String title){
         List<Note> noteList = noteRepository.getByDescriptionLike(title);
         List<NoteDto> noteDtoList = new ArrayList<NoteDto>();
@@ -98,6 +128,7 @@ public class NoteController {
 
             noteDto.setTitle(note.getTitle());
             noteDto.setNote(note.getNote());
+            noteDto.setUserId(note.getUserId());
 
             noteDtoList.add(noteDto);
         }

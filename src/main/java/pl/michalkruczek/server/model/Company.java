@@ -23,6 +23,16 @@ public class Company {
     private String phone;
     @Column
     private String email;
+    @Column
+    private Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Long getId() {
         return id;
