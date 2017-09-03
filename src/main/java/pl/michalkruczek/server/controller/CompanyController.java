@@ -72,8 +72,8 @@ public class CompanyController {
         return companyDto;
     }
 
-    @RequestMapping(value = "/updata/{id}", method = RequestMethod.PUT)
-    public String updataCompany(@PathVariable long id, @RequestBody CompanyDto companyDto) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public String updateCompany(@PathVariable long id, @RequestBody CompanyDto companyDto) {
 
         Company company = companyRepository.findOne(id);
 
@@ -85,7 +85,7 @@ public class CompanyController {
 
         companyRepository.save(company);
 
-        return "Updata company [" + company.getName() + "].";
+        return "Update company [" + company.getName() + "].";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)

@@ -36,19 +36,19 @@ public class ProductController {
 
     @RequestMapping("/all")
     public List<ProductDto> allProducts() {
-        List<Product> products = productRepository.findAll();
-        List<ProductDto> productsDto = new ArrayList<ProductDto>();
+        List<Product> productList = productRepository.findAll();
+        List<ProductDto> productDtoList = new ArrayList<ProductDto>();
 
-        for (Product product : products) {
+        for (Product product : productList) {
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
             productDto.setName(product.getName());
             productDto.setDescription(product.getDescription());
             productDto.setPrice(product.getPrice());
 
-            productsDto.add(productDto);
+            productDtoList.add(productDto);
         }
-        return productsDto;
+        return productDtoList;
     }
 
     @RequestMapping("/{id}")
@@ -64,8 +64,8 @@ public class ProductController {
         return productDto;
     }
 
-    @RequestMapping(value = "/updata/{id}", method = RequestMethod.PUT)
-    public String updataProduct(@PathVariable long id, @RequestBody ProductDto productDto) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public String updateProduct(@PathVariable long id, @RequestBody ProductDto productDto) {
 
         Product product = productRepository.findOne(id);
 
@@ -75,7 +75,7 @@ public class ProductController {
 
         productRepository.save(product);
 
-        return "Updata product - success [" + product.getName() + "]."; //TODO spelling updata??
+        return "Update product - success [" + product.getName() + "].";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)

@@ -1,4 +1,6 @@
-package pl.michalkruczek.server.main;
+package pl.michalkruczek.server.dto;
+
+import java.util.Date;
 
 /**
  * Created by mikr on 18/08/17.
@@ -8,7 +10,7 @@ public class TaskDto {
     private Long id;
     private String name;
     private String description;
-    private Double budget;
+    private Date date;
     private Boolean done;
 
     public Long getId() {
@@ -35,12 +37,12 @@ public class TaskDto {
         this.description = description;
     }
 
-    public Double getBudget() {
-        return budget;
+    public Date getDate() {
+        return date;
     }
 
-    public void setBudget(Double budget) {
-        this.budget = budget;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Boolean getDone() {

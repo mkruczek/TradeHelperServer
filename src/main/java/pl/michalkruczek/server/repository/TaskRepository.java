@@ -1,8 +1,8 @@
-package pl.michalkruczek.server.main;
+package pl.michalkruczek.server.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import pl.michalkruczek.server.main.Task;
+import pl.michalkruczek.server.model.Task;
 
 import java.util.List;
 
