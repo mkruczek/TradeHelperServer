@@ -6,7 +6,6 @@ import pl.michalkruczek.server.dto.UserDto;
 import pl.michalkruczek.server.model.User;
 import pl.michalkruczek.server.repository.UserRepository;
 
-import javax.jws.soap.SOAPBinding;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
 INSERT INTO users(name, surname, login, password) VALUES ('Michał', 'Kruczek','mikr', 'qwerty');
-INSERT INTO users(name, surname, login, password) VALUES ('Jarosław', 'Urych','jaur', 'asdfgh');*
+INSERT INTO users(name, surname, login, password) VALUES ('Piotr', 'Kowalski','piko', 'asdfgh');
 INSERT INTO products(name, description, price) VALUES ('1_Marchew', '1. Jakiś wspaniały opis, zachecający do kupienia tego wyśmienitego produktu :)', 11.11);
 INSERT INTO products(name, description, price) VALUES ('2_Jabłko', '2. Jakiś wspaniały opis, zachecający do kupienia tego wyśmienitego produktu :)', 22.22);
 INSERT INTO products(name, description, price) VALUES ('3_Banan', '3. Jakiś wspaniały opis, zachecający do kupienia tego wyśmienitego produktu :)', 33.33);
